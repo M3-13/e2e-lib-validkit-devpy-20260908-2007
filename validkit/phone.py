@@ -56,6 +56,9 @@ def normalize_phone(text: str, country_code: str) -> str:
     if not text:
         raise ValueError("normalize_phone: empty input")
 
+    if len(country_code) > _MAX_INPUT_LENGTH:
+        raise ValueError("normalize_phone: country code too long")
+
     country = country_code.strip().upper()
     if country not in _COUNTRY_DIALING_CODES:
         raise ValueError("normalize_phone: unknown country code")

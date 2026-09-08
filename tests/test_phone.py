@@ -103,6 +103,11 @@ def test_input_over_documented_max_length_raises_before_processing():
         normalize_phone("1" * 10_001, "DE")
 
 
+def test_country_code_over_documented_max_length_raises_before_processing():
+    with pytest.raises(ValueError, match="normalize_phone: country code too long"):
+        normalize_phone("030 1234567", "D" * 10_001)
+
+
 def test_unknown_international_dialing_code_raises_value_error():
     with pytest.raises(ValueError, match="unknown international dialing code"):
         normalize_phone("+39 06 12345678", "DE")
